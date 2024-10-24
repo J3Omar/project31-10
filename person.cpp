@@ -1,21 +1,31 @@
 #ifndef PERSON_H
 #define PERSON_H
+
 #include "address.cpp"
 #include <iostream>
 #include <stdexcept>
+#define  tab "\t\t\t"
+
 using namespace std;
-class person:public address{
+class Person:public address{
     private:
     string first_name,last_name,Class,*numbers,*mails;
     int numSize,mailSize;
     bool fav;
+    int person_id;
     public:
+    static int id;
+    Person()
+    {
+        id++;
+        person_id=id;
+    }
     void setFname()
     {
         cout<<"Fn: ";
         cin>>first_name;
     }
-    void setLname(string ln)
+    void setLname()
     {
         cout<<"Ln: ";
         cin>>last_name;
@@ -96,21 +106,21 @@ class person:public address{
         {
         for(int i=0;i<numSize;i++)
         {
-        cout<<numbers[i]<<"\t";
+        cout<<numbers[i]<<"  ";
         }
         cout<<endl;
         }
         else
             throw out_of_range("error in index");
     }
-    void setMails()
+    void getMails()
     const
     {
         if(mailSize>0)
         {
         for(int i=0;i<mailSize;i++)
         {
-        cout<<mails[i]<<"\t";
+        cout<<mails[i]<<"  ";
         }
         cout<<endl;
         }
@@ -123,7 +133,16 @@ class person:public address{
     {
         return fav;
     }
-    ~person()
+    friend ostream&operator<<(ostream &output,Person &p)
+    {
+        output<<"ID"<<tab<<"Fname"<<tab<<"Lname"<<tab<<"Classifiction"<<tab<<"Fav"<<tab<<"Address"<<tab<<"Phone num"<<tab<<"mails\t\t\t\n";
+        output<<id<<tab<<p.getFname()<<tab<<p.getLname()<<tab;
+        p.getNumbers();
+        output<<tab;
+        p.getMails();
+        output<<tab<<p.getFav()<<endl;
+    }
+    ~Person()
     {
         delete []mails;
         delete []numbers;
