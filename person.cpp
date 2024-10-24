@@ -3,8 +3,9 @@
 
 #include "address.cpp"
 #include <iostream>
+#include <iomanip>
 #include <stdexcept>
-#define  tab "\t\t\t"
+#define  tab setw(25)
 
 using namespace std;
 class Person:public address{
@@ -108,7 +109,6 @@ class Person:public address{
         {
         cout<<numbers[i]<<"  ";
         }
-        cout<<endl;
         }
         else
             throw out_of_range("error in index");
@@ -122,7 +122,6 @@ class Person:public address{
         {
         cout<<mails[i]<<"  ";
         }
-        cout<<endl;
         }
         else
             throw out_of_range("error in index");
@@ -135,12 +134,12 @@ class Person:public address{
     }
     friend ostream&operator<<(ostream &output,Person &p)
     {
-        output<<"ID"<<tab<<"Fname"<<tab<<"Lname"<<tab<<"Classifiction"<<tab<<"Fav"<<tab<<"Address"<<tab<<"Phone num"<<tab<<"mails\t\t\t\n";
-        output<<id<<tab<<p.getFname()<<tab<<p.getLname()<<tab;
+        output<<"ID"<<tab<<"Fname"<<tab<<"Lname"<<tab<<"Classifiction"<<tab<<"Fav"<<tab<<tab<<tab<<tab<<"Address"<<tab<<"Phone num"<<tab<<"mails\n";
+        output<<id<<tab<<p.getFname()<<tab<<p.getLname()<<tab<<p.getclass()<<tab<<p.getFav()<<tab<<p.getstreetnum()<<p.getstreetname()<<p.gettwon()<<p.getstate()<<tab;
         p.getNumbers();
         output<<tab;
         p.getMails();
-        output<<tab<<p.getFav()<<endl;
+        output<<endl;
     }
     ~Person()
     {
