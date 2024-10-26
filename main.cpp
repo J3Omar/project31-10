@@ -3,25 +3,35 @@
 
 using namespace std;
 
+
+void displayMenu()
+{
+    cout << "\n================ Contacts Book Menu: ================\n";
+    cout << "1: Add a new Contact\n";
+    cout << "2: Search by Last Name\n";
+    cout << "3: Search by Classification\n";
+    cout << "4: Print All Contacts\n";
+    cout << "5: Print Favorite Contacts\n";
+    cout << "6: Save to File\n";
+    cout << "7: Load from File\n";
+    cout << "8: Delete Contact\n";
+    cout << "9: Update Contact Information\n";
+    cout << "10: Share contact with other\n";
+    cout << "11: Reverse contacts book\n";
+    cout << "12: Exit\n";
+    cout << "=====================================================\n";
+}
+
+
+
+
 int main() {
     int num, t;
     string temp;
     Contact c1;
 
     do {
-        cout << "Enter\n";
-        cout << tab << "1: Add a contact" << endl;
-        cout << tab << "2: Search by last name" << endl;
-        cout << tab << "3: Search by classification" << endl;
-        cout << tab << "4: Print all contacts" << endl;
-        cout << tab << "5: Print favorite contacts" << endl;
-        cout << tab << "6: Save to file" << endl;
-        cout << tab << "7: Load from file" << endl;
-        cout << tab << "8: Delete contact" << endl;
-        cout << tab << "9: Update contact information" << endl;
-        cout << tab << "10: Share contacts with others" << endl;
-        cout << tab << "11: Reverse contacts book" << endl;
-        cout << tab << "12: Exit" << endl;
+        displayMenu();
         cin >> num;
 
         switch (num) {
@@ -43,7 +53,7 @@ int main() {
                 c1.printFavContact();
                 break;
             case 6:
-            
+                c1.saveFile();
                 break;
             case 7:
                 

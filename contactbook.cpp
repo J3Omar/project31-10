@@ -1,9 +1,8 @@
 #ifndef CONTACTBOOK_H
 #define CONTACTBOOK_H
-
 #include <iostream>
 #include "Array.cpp"
-
+#include <fstream>
 using namespace std;
 
 class Contact {
@@ -51,6 +50,10 @@ public:
     void reverseContact() {
         a.reverse();
         a.display();
+    }
+    void saveFile ()
+    {
+        a.save();
     }
 };
 

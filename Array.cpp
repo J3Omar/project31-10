@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <stdexcept>
 #include "Person.cpp"
 using namespace std;
@@ -13,22 +14,20 @@ public:
     Array(int cap = 10);
     ~Array();
     void append();
-    void insert(int index, const Person &element);
     void display() const;
     void reverse();
-    void sort();
     int getSize() const;
     Person get(int index) const;
-    void remove();
     int searchLastName(const string &LastName) const;
     void Delete(int index);
-    void operator[](int i);
     void printAt(int index);
     int searchClassification(const string &classification) const;
     void printByFav();
     void modify(int index);
+    void save();
 };
 int Person::id=0;
+
 Array::Array(int cap) : capacity(cap), size(0) {
     arr = new Person[capacity];
 }
@@ -75,35 +74,14 @@ void Array::append() {
     arr[size].setstate();
     size++;
 }
-void Array::operator[](int i) {
-    capacity = i;
-    arr = new Person[capacity];
-}
+
 void Array::printAt(int index) {
     if (index > -1 && index <= size)
-        cout << arr[index];
+        cout << arr[index]<<endl;
     else
         throw out_of_range("error index");
 }
-void Array::insert(int index, const Person &element) {
-    if (index > size || index < 0)
-        throw out_of_range("Index out of range");
 
-    if (size >= capacity) {
-        capacity *= 2;
-        Person *newArr = new Person[capacity];
-        for (int i = 0; i < size; i++) {
-            newArr[i] = arr[i];
-        }
-        delete[] arr;
-        arr = newArr;
-    }
-    for (int i = size; i > index; i--) {
-        arr[i] = arr[i - 1];
-    }
-    arr[index] = element;
-    size++;
-}
 void Array::display() const {
     for (int i = 0; i < size; i++) {
         cout << arr[i] << endl;
@@ -126,12 +104,7 @@ Person Array::get(int index) const {
         throw out_of_range("Index out of range");
     return arr[index];
 }
-void Array::remove() {
-    if (size > 0)
-        size--;
-    else
-        throw out_of_range("Array is empty, cannot remove");
-}
+
 int Array::searchLastName(const string &lastName) const {
     if (size == 0) {
         return -1;
@@ -163,6 +136,23 @@ void Array::Delete(int index) {
     }
     size--;
 }
+void Array::save()
+{
+    if (size<=0)
+        throw out_of_range("error in range");
+        else{
+        ofstream out;
+        out.open("data.xls");
+        out<<"ID\t"<<"Fname\t"<<"Lname\t"<<"Classification\t"<<"Fav\t"<<"Address\t"<<"Phone_num\t"<<"Mails\n";
+        for(int i=0;i<size;i++)
+        {
+            
+            out<<arr[i].person_id<<"\t"<<arr[i].getFname()<<"\t"<<arr[i].getLname()<<"\t"<<arr[i].getclass()<<"\t"<<((arr[i].getFav())?"Yes":"No")<<"\t"<<arr[i].getstreetnum()<<" "<<arr[i].getstreetname()<<","<<arr[i].gettwon()<<","<<arr[i].getstate()<<"\t"<<arr[i].getNumbers()<<"\t"<<arr[i].getMails()<<"\n";
+        }
+        out.close();
+        }
+        
+        }
 Array::~Array() {
     delete[] arr;
 }

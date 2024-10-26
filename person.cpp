@@ -5,7 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include <stdexcept>
-#define  tab setw(25)
+#define  tab setw(20)
 
 using namespace std;
 class Person:public address{
@@ -13,8 +13,9 @@ class Person:public address{
     string first_name,last_name,Class,*numbers,*mails;
     int numSize,mailSize;
     bool fav;
-    int person_id;
     public:
+    int person_id;
+    
     static int id;
     Person()
     {
@@ -98,30 +99,33 @@ class Person:public address{
         return Class;
         
     }
-    void getNumbers()
+    string getNumbers()
     const
     {
-        
+        string res="";
         
         if(numSize>0)
         {
         for(int i=0;i<numSize;i++)
         {
-        cout<<numbers[i]<<"  ";
+        res+=numbers[i]+" ";
         }
+        return res;
         }
         else
             throw out_of_range("error in index");
     }
-    void getMails()
+    string getMails()
     const
     {
+        string res="";
         if(mailSize>0)
         {
         for(int i=0;i<mailSize;i++)
         {
-        cout<<mails[i]<<"  ";
+        res+=mails[i]+" ";
         }
+        return res;
         }
         else
             throw out_of_range("error in index");
@@ -132,15 +136,29 @@ class Person:public address{
     {
         return fav;
     }
-    friend ostream&operator<<(ostream &output,Person &p)
-    {
-        output<<"ID"<<tab<<"Fname"<<tab<<"Lname"<<tab<<"Classifiction"<<tab<<"Fav"<<tab<<tab<<tab<<tab<<"Address"<<tab<<"Phone num"<<tab<<"mails\n";
-        output<<id<<tab<<p.getFname()<<tab<<p.getLname()<<tab<<p.getclass()<<tab<<p.getFav()<<tab<<p.getstreetnum()<<p.getstreetname()<<p.gettwon()<<p.getstate()<<tab;
-        p.getNumbers();
-        output<<tab;
-        p.getMails();
-        output<<endl;
-    }
+    friend ostream& operator<<(ostream &output, Person &p) {
+    output << left << setw(5) << "ID" << setw(15) << "Fname" << setw(15) << "Lname"
+           << setw(15) << "Classification" << setw(5) << "Fav" << setw(30) << "Address"
+           << setw(20) << "Phone num" << setw(20) << "Mails" << endl;
+
+    output << left << setw(5) << p.person_id << setw(15) << p.getFname() << setw(15) << p.getLname()
+           << setw(15) << p.getclass() << setw(5) << (p.getFav() ? "Yes" : "No") << setw(30)
+           << to_string(p.getstreetnum()) + " " + p.getstreetname() + "," + p.gettwon() + "," + p.getstate();
+
+    
+    output << setw(20)<<p.getNumbers();
+
+    
+    output << setw(20)<<p.getMails();
+
+    output << endl;
+    return output;
+}
+ int getId()
+ {
+    return person_id;
+ }
+
     ~Person()
     {
         delete []mails;
