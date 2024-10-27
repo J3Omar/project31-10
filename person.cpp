@@ -9,11 +9,11 @@
 
 using namespace std;
 class Person:public address{
-    private:
+    public:
     string first_name,last_name,Class,*numbers,*mails;
     int numSize,mailSize;
     bool fav;
-    public:
+    
     int person_id;
     
     static int id;

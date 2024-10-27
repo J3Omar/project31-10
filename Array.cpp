@@ -2,6 +2,7 @@
 #include <fstream>
 #include <stdexcept>
 #include "Person.cpp"
+#include <fstream>
 using namespace std;
 
 class Array {
@@ -25,6 +26,7 @@ public:
     void printByFav();
     void modify(int index);
     void save();
+    void load();
 };
 int Person::id=0;
 
@@ -153,6 +155,52 @@ void Array::save()
         }
         
         }
+        void Array::load() {
+    ifstream in("data.xls");
+    if (!in) {
+        cout << "Unable to open file.\n";
+        return;
+    }
+    
+    string header;
+    getline(in, header);
+    
+    while (in) {
+        Person p;
+        string fav;
+        
+        in >> p.person_id >> p.first_name >> p.last_name >> p.Class >> fav;
+        p.fav = (fav == "Yes");
+        
+           
+        in >> p.streetnum;
+        in.ignore();   
+        getline(in, p.streetname, ',');
+        getline(in, p.town, ',');
+        in >> p.state;
+        int numPhones;
+        in >> numPhones;
+        p.numbers = new string[numPhones];
+        p.numSize = numPhones;
+        for (int i = 0; i < numPhones; ++i) {
+            in >> p.numbers[i];
+        }
+
+        
+        int numMails;
+        in >> numMails;
+        p.mails = new string[numMails];
+        p.mailSize = numMails;
+        for (int i = 0; i < numMails; ++i) {
+            in >> p.mails[i];
+        }
+
+        
+    }
+    in.close();
+    cout << "Contacts loaded successfully.\n";
+}
+
 Array::~Array() {
     delete[] arr;
 }

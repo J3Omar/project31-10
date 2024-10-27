@@ -55,6 +55,19 @@ public:
     {
         a.save();
     }
+    void loadfile()
+    {
+        a.load();
+    }
+    void shareContact(int index) {
+    if (index >= 0 && index < a.getSize()) {
+        cout << "Contact to Share:\n";
+        a.printAt(index);
+    } else {
+        cout << "Error: Invalid contact index.\n";
+    }
+}
+
 };
 
 #endif

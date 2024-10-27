@@ -56,7 +56,7 @@ int main() {
                 c1.saveFile();
                 break;
             case 7:
-                
+                c1.loadfile();
                 break;
             case 8:
                 cin >> t;
@@ -67,7 +67,8 @@ int main() {
                 c1.update(t);
                 break;
             case 10:
-               
+            cin>>t;
+                c1.shareContact(t);
                 break;
             case 11:
                 c1.reverseContact();
