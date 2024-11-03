@@ -2,7 +2,6 @@
 #include <fstream>
 #include <stdexcept>
 #include "Person.cpp"
-#include <fstream>
 using namespace std;
 
 class Array {
