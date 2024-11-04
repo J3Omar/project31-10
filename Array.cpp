@@ -143,61 +143,36 @@ void Array::save()
         throw out_of_range("error in range");
         else{
         ofstream out;
-        out.open("data.xls");
+        out.open("data_output.xls");
         out<<"ID\t"<<"Fname\t"<<"Lname\t"<<"Classification\t"<<"Fav\t"<<"Address\t"<<"Phone_num\t"<<"Mails\n";
         for(int i=0;i<size;i++)
         {
             
-            out<<arr[i].person_id<<"\t"<<arr[i].getFname()<<"\t"<<arr[i].getLname()<<"\t"<<arr[i].getclass()<<"\t"<<((arr[i].getFav())?"Yes":"No")<<"\t"<<arr[i].getstreetnum()<<" "<<arr[i].getstreetname()<<","<<arr[i].gettwon()<<","<<arr[i].getstate()<<"\t"<<arr[i].getNumbers()<<"\t"<<arr[i].getMails()<<"\n";
+            out<<arr[i].getId()<<"\t"<<arr[i].getFname()<<"\t"<<arr[i].getLname()<<"\t"<<arr[i].getclass()<<"\t"<<((arr[i].getFav())?"Yes":"No")<<"\t"<<arr[i].getstreetnum()<<" "<<arr[i].getstreetname()<<","<<arr[i].gettwon()<<","<<arr[i].getstate()<<"\t"<<arr[i].getNumbers()<<"\t"<<arr[i].getMails()<<"\n";
         }
         out.close();
         }
         
         }
         void Array::load() {
-    ifstream in("data.xls");
-    if (!in) {
-        cout << "Unable to open file.\n";
-        return;
-    }
+            Person p;
+            p.setFname();
+            p.setLname();
+            p.setclass();
+            p.setFav();
+            p.setNumbers();
+            p.setMails();
+            p.setstreetnum();
+            p.setstreetname();
+            p.settwon();
+            p.setstate();
+            ofstream out ;
+            out.open("data_input.xls");
+            out<<"ID\t"<<"Fname\t"<<"Lname\t"<<"Classification\t"<<"Fav\t"<<"Address\t"<<"Phone_num\t"<<"Mails\n";
+            out<<p.getId()<<"\t"<<p.getFname()<<"\t"<<p.getLname()<<"\t"<<p.getclass()<<"\t"<<((p.getFav())?"Yes":"No")<<"\t"<<p.getstreetnum()<<" "<<p.getstreetname()<<","<<p.gettwon()<<","<<p.getstate()<<"\t"<<p.getNumbers()<<"\t"<<p.getMails()<<"\n";
+            out.close();    
     
-    string header;
-    getline(in, header);
     
-    while (in) {
-        Person p;
-        string fav;
-        
-        in >> p.person_id >> p.first_name >> p.last_name >> p.Class >> fav;
-        p.fav = (fav == "Yes");
-        
-           
-        in >> p.streetnum;
-        in.ignore();   
-        getline(in, p.streetname, ',');
-        getline(in, p.town, ',');
-        in >> p.state;
-        int numPhones;
-        in >> numPhones;
-        p.numbers = new string[numPhones];
-        p.numSize = numPhones;
-        for (int i = 0; i < numPhones; ++i) {
-            in >> p.numbers[i];
-        }
-
-        
-        int numMails;
-        in >> numMails;
-        p.mails = new string[numMails];
-        p.mailSize = numMails;
-        for (int i = 0; i < numMails; ++i) {
-            in >> p.mails[i];
-        }
-
-        
-    }
-    in.close();
-    cout << "Contacts loaded successfully.\n";
 }
 
 Array::~Array() {

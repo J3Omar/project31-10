@@ -5,10 +5,10 @@
 using namespace std;
 class address
 {
-    public:
+    protected:
     int streetnum;
     string streetname,town,state;
-    
+    public:
     address()
     {}
     //set
