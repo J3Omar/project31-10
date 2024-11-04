@@ -5,9 +5,11 @@
 #include <iostream>
 #include <iomanip>
 #include <stdexcept>
-#define  tab setw(20)
+
 
 using namespace std;
+
+
 class Person:public address{
     private:
     string first_name,last_name,Class,*numbers,*mails;
@@ -21,6 +23,7 @@ class Person:public address{
         id++;
         person_id=id;
     }
+    //set
     void setFname()
     {
         cout<<"Fn: ";
@@ -135,12 +138,18 @@ class Person:public address{
     {
         return fav;
     }
+    int getId()
+    const
+    {
+     
+        return person_id;
+    }
     friend ostream& operator<<(ostream &output, Person &p) {
     output << left << setw(5) << "ID" << setw(15) << "Fname" << setw(15) << "Lname"
            << setw(15) << "Classification" << setw(5) << "Fav" << setw(30) << "Address"
            << setw(20) << "Phone num" << setw(20) << "Mails" << endl;
 
-    output << left << setw(5) << p.person_id << setw(15) << p.getFname() << setw(15) << p.getLname()
+    output << left << setw(5) << p.getId() << setw(15) << p.getFname() << setw(15) << p.getLname()
            << setw(15) << p.getclass() << setw(5) << (p.getFav() ? "Yes" : "No") << setw(30)
            << to_string(p.getstreetnum()) + " " + p.getstreetname() + "," + p.gettwon() + "," + p.getstate();
 
@@ -153,10 +162,8 @@ class Person:public address{
     output << endl;
     return output;
 }
- int getId()
- {
-    return person_id;
- }
+
+ 
 
     ~Person()
     {
