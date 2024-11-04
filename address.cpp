@@ -10,10 +10,10 @@
 using namespace std;
 class address
 {
-    protected:
+    public:
     int streetnum;
     string streetname,town,state;
-    public:
+    
     address()
     {}
     //set
