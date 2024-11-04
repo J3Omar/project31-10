@@ -28,7 +28,6 @@ public:
     void load();
 };
 int Person::id=0;
-
 Array::Array(int cap=10) : capacity(cap), size(0) {
     arr = new Person[capacity];
 }

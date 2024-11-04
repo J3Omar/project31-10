@@ -105,7 +105,6 @@ class Person:public address{
     const
     {
         string res="";
-        
         if(numSize>0)
         {
         for(int i=0;i<numSize;i++)
@@ -144,6 +143,7 @@ class Person:public address{
      
         return person_id;
     }
+    
     friend ostream& operator<<(ostream &output, Person &p) {
     output << left << setw(5) << "ID" << setw(15) << "Fname" << setw(15) << "Lname"
            << setw(15) << "Classification" << setw(5) << "Fav" << setw(30) << "Address"
@@ -171,4 +171,5 @@ class Person:public address{
         delete []numbers;
     }
 };
+
 #endif
