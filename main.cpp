@@ -1,10 +1,6 @@
-/*
-عمر رضا 
-*/
-
-
 #include <iostream>
 #include "contactbook.cpp"
+#include "array.cpp"
 
 using namespace std;
 
@@ -33,7 +29,7 @@ void displayMenu()
 int main() {
     int num, t;
     string temp;
-    Contact c1;
+    Array<Contact> a(1);
 
     do {
         displayMenu();
@@ -41,42 +37,83 @@ int main() {
 
         switch (num) {
             case 1:
-                c1.add();
+                a.append();
+                a[a.getSize()].add();
                 break;
             case 2:
                 cin >> temp;
-                c1.searchByLastName(temp);
+                for (int i=0;i<a.getSize();i++)
+                {
+                    if(a[i].searchBYLastName(temp)==true)
+                    cout<<a[i]<<endl;
+                }
                 break;
             case 3:
                 cin >> temp;
-                c1.searchByClassification(temp);
+                for (int i=0;i<a.getSize();i++)
+                {
+                    if(a[i].searchByClassification(temp)==true)
+                    cout<<a[i];
+                }
                 break;
             case 4:
-                c1.printAllContact();
+                for(int i=0;i<a.getSize();i++)
+                {
+                    cout<<a[i];
+                }
                 break;
             case 5:
-                c1.printFavContact();
+                for (int i=0;i<a.getSize();i++)
+                {
+                    if(a[i].isFav()==true)
+                    cout<<a[i];
+                }
                 break;
             case 6:
-                c1.saveFile();
+                    ofstream out;
+                    out.open("data.xls");
+                    out << "ID\t" << "Fname\t" << "Lname\t" << "Classification\t" << "Fav\t" << "Address\t" << "Phone_num\t" << "Mails\n";
+                    for (int i=0;i<a.getSize();i++)
+                    {
+                        out<<a[i];
+                    }
+                    out.close();
                 break;
             case 7:
-                c1.loadfile();
+                ifstream in("data.xls");
+                if (!in) {
+                cout << "Error opening file for reading.\n";
+                return;
+                }
+                else
+                {
+                for (int i=0;i<a.getSize();i++)
+                {
+                    in>>a[i];
+                }
+                }
+                in.close();
                 break;
             case 8:
                 cin >> t;
-                c1.deleteContact(t);
+                a.Delete(t);
                 break;
             case 9:
                 cin >> t;
-                c1.update(t);
+                if (t>-1)
+                a[t].add();
+                else 
+                throw out_of_range("error");
                 break;
             case 10:
             cin>>t;
-                c1.shareContact(t);
+            if (t>-1)
+                cout<<a[t];
+                else 
+                throw out_of_range("error");
                 break;
             case 11:
-                c1.reverseContact();
+                a.reverse();
                 break;
             default:
                 break;

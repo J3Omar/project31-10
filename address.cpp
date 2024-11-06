@@ -1,41 +1,34 @@
-/*
-عمر توفيق
-عمر عاطف
-*/
-
 #ifndef ADDRESS_H
 #define ADDRESS_H
 #include <string>
 #include <iostream>
+#include <iomanip>
 using namespace std;
 class address
 {
-    public:
+    private:
     int streetnum;
     string streetname,town,state;
-    
+    public:
     address()
     {}
     //set
-    void setstreetnum()
+    void setstreetnum(int n)
     {
-        cout <<"streetnum: ";
-        cin>>streetnum;
+        
+        streetnum=n;
     }
-    void setstreetname()
+    void setstreetname(string s)
     {
-        cout<<"streetname: ";
-        cin>>streetname;
+        streetname=s;
     }
-    void settwon()
+    void settwon(string t)
     {
-        cout<<"town: ";
-        cin>>town;
+        town=t;
     }
-    void setstate()
+    void setstate(string s)
     {
-        cout<<"state: ";
-        cin>>state;
+        state=s;
     }
 
     //get
@@ -59,6 +52,11 @@ class address
     const
     {
         return state;
+    }
+    friend ostream& operator<<(ostream &output,address &a) 
+    {
+        output<<setw(30)<< to_string(a.getstreetnum()) + " " + a.getstreetname() + "," + a.gettwon() + "," + a.getstate()<<endl;
+        return output;
     }
   ~address()
   {
